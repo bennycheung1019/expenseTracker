@@ -1,17 +1,69 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title> MarkIt (Pre-Alpha) </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="main-div ion-padding">
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Budget Left</ion-card-subtitle>
+        <ion-card-title>${{budgetSum}}</ion-card-title>
+      </ion-card-header>
+      </ion-card>
+
+      <ion-button expand="block" routerLink="/detail/add">
+        <ion-icon slot="start" name="add"></ion-icon>
+          <ion-label> New Transaction </ion-label>
+      </ion-button>
+
+    <!-- <div class="list">
+      <ion-list>
+        <ion-item-sliding *ngFor="let record of fullList">
+          <ion-item [routerLink]="['/detail/',record.$key]">
+            <ion-label>
+              {{record.title}} {{record.date}}
+              <p [ngClass]="{expense: record.type === 'expense', income: record.type === 'income'}">{{record.subTitle}}</p>
+            </ion-label>
+              <p class="amount" [ngClass]="{expense: record.type === 'expense', income: record.type === 'income'}">${{record.amount}}</p>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger">
+              <ion-icon name="trash-outline" ion-button clear (click)="deleteRecord(record.$key)"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div> -->
+
+    <div>
+      <ion-item-group *ngFor="let sortedRecord of fullList | groupBy: 'date'">
+        <ion-item-divider color="light">
+          {{ sortedRecord.key }}
+        </ion-item-divider>
+        <ion-item-sliding *ngFor="let record of sortedRecord.list">
+          <ion-item [routerLink]="['/detail/',record.$key]">
+            <ion-label>
+              {{record.title}}
+              <p [ngClass]="{expense: record.type === 'expense', income: record.type === 'income'}">{{record.subTitle}}</p>
+            </ion-label>
+              <p class="amount" [ngClass]="{expense: record.type === 'expense', income: record.type === 'income'}">${{record.amount}}</p>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option color="danger" ion-button clear (click)="deleteRecord(record.$key)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-item-group>
+    </div>
+
+      <!-- <ion-fab-button color="primary">
+        <ion-icon name="add-outline" routerLink="/detail/add"></ion-icon>
+      </ion-fab-button> -->
+  </div>
+
+
 </ion-content>

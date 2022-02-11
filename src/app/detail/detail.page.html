@@ -1,0 +1,51 @@
+<ion-content>
+  <form [formGroup]="recordForm" (ngSubmit)="formSubmit()">
+  <ion-icon name="arrow-back-outline" class="ion-padding" routerLink="/tabs"></ion-icon>
+  <div class="main-section">
+    <h3 class="ion-padding">{{isEdit ? 'Edit Detail' : 'New Transaction'}}</h3>
+    <div class="form ion-padding ion-margin">
+
+      <div *ngIf="!isEdit">
+      <ion-segment (ionChange)="segmentChanged($event)" formControlName="type" [(ngModel)]="defaultIsExpense" color="primary" >
+        <ion-segment-button value="expense" >
+          <ion-icon name="bag-outline"></ion-icon>
+          <ion-label>Expense</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="income">
+          <ion-icon name="wallet-outline"></ion-icon>
+          <ion-label>Add Budget</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+      </div>
+
+      <!-- *** HOW TO USE *ngIf="!isEdit; else #editPage" -->
+      <!-- <ng-template #editPage>
+        <ion-segment (ionChange)="segmentChanged($event)" formControlName="type"></ion-segment>
+      </ng-template> -->
+
+      <!-- <ion-select interface="action-sheet" formControlName="type">
+        <ion-select-option  value="income">Add Budget</ion-select-option>
+        <ion-select-option  value="expense">Expense</ion-select-option>
+      </ion-select> -->
+
+      <div [hidden]="segmentValue === 'income'">
+      <ion-input formControlName="title" placeholder="What did you buy?"></ion-input>
+      <ion-input formControlName="subTitle" placeholder="Catagory"></ion-input>
+      </div>
+
+
+      <ion-input formControlName="amount" placeholder="Amount" type="number"></ion-input>
+      <ion-input formControlName="date" type="date" placeholder={{todayIs}}></ion-input>
+
+
+      <ion-button type="submit" color="dark">{{isEdit ? 'Save' : 'Add'}} &nbsp; <ion-spinner *ngIf="loading"></ion-spinner></ion-button>
+      <div *ngIf= "isEdit">
+      <ion-button color="danger" (click)="deleteRecord(id)">Delete &nbsp; <ion-spinner *ngIf="loading"></ion-spinner></ion-button>
+      </div>
+
+    </div>
+  </div>
+
+</form>
+
+</ion-content>

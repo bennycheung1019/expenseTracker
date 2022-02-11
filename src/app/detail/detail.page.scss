@@ -1,0 +1,40 @@
+ ion-icon{
+   font-size: 2rem;
+ }
+ ion-icon-focus{
+   outline: none;
+ }
+
+ .main-section{
+   h3{
+     padding-bottom: 0;
+   }
+   .form{
+     border: 1px solid #000;
+     border-radius: 7px;
+
+     ion-segment-button {
+      --background-checked: var(--ion-color-success);
+      --color-checked: var(--ion-color-success-contrast);
+    }
+
+    //  ion-select {
+    //    border: 1px solid #ddd;
+    //    border-radius: 17px;
+    //  }
+
+     ion-input{
+       border: 1px solid #ddd;
+       margin: 20px 0;
+       border-radius: 17px;
+       --padding-start: 23px;
+     }
+
+     ion-button{
+       width: 100%;
+       --border-radius: 17px;
+     }
+   }
+ }
+
+
